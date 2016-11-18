@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous" />
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+
+
+<title th:text="${selectedReview.title}"></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				Review Site <small>A Site for Reviews</small>
+			</h1>
+		</div>
+		<ol class="breadcrumb">
+			<li><a href="/index.html">Home</a></li>
+			<li><a href="/all">All Reviews</a></li>
+			<li class="active" th:text="${selectedReview.id}"></li>
+		</ol>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title" th:text="${selectedReview.title}"></h2>
+				<p th:text="'By ' + ${selectedReview.author}"></p>
+			</div>
+			<div class="panel-body">
+				<p th:text="${selectedReview.content}"></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
