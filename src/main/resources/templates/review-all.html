@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Reviews</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<h1>All Reviews</h1>
+
+<!-- Put the for-each loop inside the tag you want to repeat -->
+	<ol>
+		<li th:each="review : ${reviews}">
+		<a th:href="@{'review?id=' + ${review.id}}" th:text="${review.title}" />
+		</li>
+   </ol>
+   
+	<!-- Using maps instead of collection (collection is conventional) <div th:each="review : ${reviews}">
+	<li><a th:href="@{'review?id=' + ${review.value.id}}">
+		<p th:text="${review.value.title}"></p></a></li>
+   </div> -->
+   
+</body>
+</html>

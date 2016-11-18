@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class Review {
 
 	public Review(long id, String title, Date date, String author, String content) {
@@ -17,6 +17,8 @@ public class Review {
 		this.author = author;
 		this.content = content;
 	}
+	
+	
 	private long id;
 	private String title;
 	private Date date;
