@@ -6,10 +6,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Review {
 
-	public Review(long id, String title, Date date, String author, String content) {
+	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	private String title;
+	private Date date;
+	private String author;
+	private String content;
+	
+	protected Review() {}
+	
+	public Review (long id, String title, Date date, String author, String content) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -18,12 +30,6 @@ public class Review {
 		this.content = content;
 	}
 	
-	
-	private long id;
-	private String title;
-	private Date date;
-	private String author;
-	private String content;
 	public long getId() {
 		return id;
 	}
@@ -39,5 +45,12 @@ public class Review {
 	public String getContent() {
 		return content;
 	}
+	
+//	@Override
+//    public String toString() {
+//        return String.format(
+//				"Review[id=%d, firstName='%s', lastName='%s']",
+//                id, firstName, lastName);
+//    }
 	
 }
