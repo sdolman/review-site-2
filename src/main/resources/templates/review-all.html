@@ -1,26 +1,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All Reviews</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="style.css" />
+<title>All Reviews</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<h1>All Reviews</h1>
+	<h1>All Reviews</h1>
 
-<!-- Put the for-each loop inside the tag you want to repeat -->
+	<!-- Put the for-each loop inside the tag you want to repeat -->
 	<ol>
-		<li th:each="review : ${reviews}">
-		<a th:href="@{'review?id=' + ${review.id}}" th:text="${#strings.capitalize(review.category.name)} + ': ' +${review.title}" />
+		<li th:each="review : ${reviews}"><a
+			th:href="@{'review?id=' + ${review.id}}"
+			th:text="${#strings.capitalize(review.category.name)} + ': ' +${review.title}" />
 		</li>
-   </ol>
-   
-   <h1>By Category</h1>
+	</ol>
 
-<!-- Put the for-each loop inside the tag you want to repeat -->
-	<ol th:each="category : ${categories}" th:text="${category.name}">
-		<li th:each="${review : category.reviews}" th:text="${review.title}">
-		</li>
-   </ol>
-   
+	<h1>By Category</h1>
+
+	<!-- Put the for-each loop inside the tag you want to repeat -->
+	<ol th:each="category : ${categories}">
+		<li th:text="${category.name}" />
+		<li th:text="'FOO' + ${category}" />
+		<li th:text="'BAR' + ${category.reviewsByCategory}" />
+		<li th:each="review : ${category.reviewsByCategory}"
+			th:text="${review.title} + 'S'">
+		
+		</li> 
+	</ol>
+
 </body>
 </html>
