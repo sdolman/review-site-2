@@ -17,8 +17,9 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String name;
-	@OneToMany(cascade = {CascadeType.MERGE},fetch= FetchType.EAGER, mappedBy = "category")
-    Set<Review> reviews; 
+//	@OneToMany(cascade = {CascadeType.MERGE},fetch= FetchType.EAGER, mappedBy = "category")
+	@OneToMany
+    Set<Review> reviews;
 	
 	protected Category() {}
 
@@ -34,6 +35,9 @@ public class Category {
 		return name;
 	}
 	
+	public Set<Review> getReviews() {
+		return reviews;
+	}
 	
 	
 }

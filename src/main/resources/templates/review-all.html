@@ -10,14 +10,17 @@
 <!-- Put the for-each loop inside the tag you want to repeat -->
 	<ol>
 		<li th:each="review : ${reviews}">
-		<a th:href="@{'review?id=' + ${review.id}}" th:text="${review.title}" />
+		<a th:href="@{'review?id=' + ${review.id}}" th:text="${#strings.capitalize(review.category.name)} + ': ' +${review.title}" />
 		</li>
    </ol>
    
-	<!-- Using maps instead of collection (collection is conventional) <div th:each="review : ${reviews}">
-	<li><a th:href="@{'review?id=' + ${review.value.id}}">
-		<p th:text="${review.value.title}"></p></a></li>
-   </div> -->
+   <h1>By Category</h1>
+
+<!-- Put the for-each loop inside the tag you want to repeat -->
+	<ol th:each="category : ${categories}" th:text="${category.name}">
+		<li th:each="${review : category.reviews}" th:text="${review.title}">
+		</li>
+   </ol>
    
 </body>
 </html>
