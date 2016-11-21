@@ -1,10 +1,13 @@
 package springMvc2;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Review {
@@ -18,16 +21,18 @@ public class Review {
 	private Date date;
 	private String author;
 	private String content;
+	@ManyToOne(cascade=CascadeType.MERGE)
+	private Category category;
 	
 	protected Review() {}
 	
-	public Review (long id, String title, Date date, String author, String content) {
+	public Review (String title, Date date, String author, String content, Category category) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.author = author;
 		this.content = content;
+		this.category = category;
 	}
 	
 	public long getId() {
@@ -44,6 +49,10 @@ public class Review {
 	}
 	public String getContent() {
 		return content;
+	}
+	
+	public Category getCategory() {
+		return category;
 	}
 	
 //	@Override

@@ -39,6 +39,7 @@
 		<ol class="breadcrumb">
 			<li><a href="/index.html">Home</a></li>
 			<li><a href="/allReviews">All Reviews</a></li>
+			<li th:text="${selectedReview.category.name}"></li>
 			<li class="active" th:text="${selectedReview.id}"></li>
 		</ol>
 		<div class="panel panel-default">

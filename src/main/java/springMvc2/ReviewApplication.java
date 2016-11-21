@@ -15,6 +15,11 @@ public class ReviewApplication {
         SpringApplication.run(ReviewApplication.class, args);
     }
     
+    
+    
+    @Resource
+    private CategoryRepository categoryRepository;
+    
     @Resource
     private ReviewRepository reviewRepository;
     
@@ -26,11 +31,16 @@ public class ReviewApplication {
     public class ReviewPopulatorRunner implements CommandLineRunner {
         @Override
         public void run(String... args) throws Exception {
-            // note that the id (I used 0L here) doesn't matter when we save via JPA. It will
-            // generate ids starting with 1.
-            
-            //the id for this Review will be 1 (technically 1L since it's long).
-            reviewRepository.save(new Review(0L, "Winning at Bingo", new Date(), "Jim Fakerton", "It's all luck"));
+        	Review review;
+        	Category strategy = new Category("strategy");
+        	strategy = categoryRepository.save(strategy);
+        	review = new Review("Winning at Bingo", new Date(), "Jim Fakerton", "It's all luck.", strategy);
+            reviewRepository.save(review);
+            review = new Review("Chess Moves: Checkmate Yesterday!", new Date(), "Bobby McBobberson", "Think and then do things.", strategy);
+            reviewRepository.save(review);
+            Category mystery = new Category("mystery");
+            mystery = categoryRepository.save(mystery);
+            review = new Review("Crimes Are Ugly", new Date(), "Batman", "I am the knight.", mystery);
         }
     }
 }
