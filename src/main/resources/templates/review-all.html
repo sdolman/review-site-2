@@ -11,21 +11,23 @@
 	<ol>
 		<li th:each="review : ${reviews}"><a
 			th:href="@{'review?id=' + ${review.id}}"
-			th:text="${#strings.capitalize(review.category.name)} + ': ' +${review.title}" />
+			th:text="${review.title} + ' [' + ${#strings.capitalize(review.category.name)} + ']'" />
 		</li>
 	</ol>
 
 	<h1>By Category</h1>
 
 	<!-- Put the for-each loop inside the tag you want to repeat -->
-	<ol th:each="category : ${categories}">
-		<li th:text="${category.name}" />
-		<li th:text="'FOO' + ${category}" />
-		<li th:text="'BAR' + ${category.reviewsByCategory}" />
-		<li th:each="review : ${category.reviewsByCategory}"
-			th:text="${review.title} + 'S'">
-		
-		</li> 
+
+	<ol>
+		<div th:each="category : ${categories}">
+
+			<li th:text="${#strings.capitalize(category.name)}"></li>
+			<ol>
+				<li th:each="review : ${category.reviewsByCategory}"><a
+					th:href="@{'review?id=' + ${review.id}}" th:text="${review.title}"></a></li>
+			</ol>
+		</div>
 	</ol>
 
 </body>
