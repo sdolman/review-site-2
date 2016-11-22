@@ -16,12 +16,12 @@ public class ReviewController {
 
 	@Resource
 	private ReviewRepository reviewRepository;
-	
-    @Resource
-    private CategoryRepository categoryRepository;
+
+	@Resource
+	private CategoryRepository categoryRepository;
 
 	@RequestMapping("/review")
-	public String review(@RequestParam(value = "id") long id, Model model) throws ParseException {
+	public String review(@RequestParam(value = "id") long id, Model model) {
 		// String pattern = "MM/dd/yyyy";
 		// SimpleDateFormat format = new SimpleDateFormat(pattern);
 		// Review review = new Review(42, "Winning at Bingo",
@@ -32,12 +32,16 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/allReviews")
-	public String displayAllReviews(@RequestParam(value = "search", required = false) String author, Model model) {
+	public String displayAllReviews(@RequestParam(value = "search", required = false) String search, Model model) {
 		Iterable<Review> reviews = reviewRepository.findAll();
 		model.addAttribute("reviews", reviews);
 		Iterable<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
-		Iterable<Review> searchResults = reviewRepository.findByAuthorIgnoreCase(author);
+		// for findBy---Or--- you need to have a duplicate parameter for each
+		// thing. For AuthorOrTitle below, those 2 things thus require 2
+		// parameters to be passed to the method in ReviewRepository
+		Iterable<Review> searchResults = reviewRepository.findByAuthorLikeOrTitleLikeAllIgnoreCase("%" + search + "%",
+				"%" + search + "%");
 		model.addAttribute("searchResults", searchResults);
 		return "review-all";
 	}
