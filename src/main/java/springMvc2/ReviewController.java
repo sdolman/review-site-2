@@ -32,11 +32,13 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/allReviews")
-	public String displayAllReviews(Model model) {
+	public String displayAllReviews(@RequestParam(value = "search", required = false) String author, Model model) {
 		Iterable<Review> reviews = reviewRepository.findAll();
 		model.addAttribute("reviews", reviews);
 		Iterable<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
+		Iterable<Review> searchResults = reviewRepository.findByAuthorIgnoreCase(author);
+		model.addAttribute("searchResults", searchResults);
 		return "review-all";
 	}
 

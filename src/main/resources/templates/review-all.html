@@ -30,5 +30,21 @@
 		</div>
 	</ol>
 
+<h1>Search</h1>
+
+
+<form action="/allReviews">
+Search: <input type="text" name="search" />
+<input type="submit" value="Submit" />
+</form>
+	<!-- Put the for-each loop inside the tag you want to repeat -->
+	<h2>Results</h2>
+	<ol>
+		<li th:each="review : ${searchResults}"><a
+			th:href="@{'review?id=' + ${review.id}}"
+			th:text="${review.title} + ' [' + ${#strings.capitalize(review.category.name)} + ']'" />
+		</li>
+	</ol>
+
 </body>
 </html>
